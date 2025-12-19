@@ -452,6 +452,12 @@
 	"HEADERS" : 
 	[
 		[
+			"C:/Users/gabri/OneDrive/Documents/logowanie/dodaj.h",
+			"MU",
+			"EWIEGA46WW/moc_dodaj.cpp",
+			null
+		],
+		[
 			"C:/Users/gabri/OneDrive/Documents/logowanie/logowanie.h",
 			"MU",
 			"EWIEGA46WW/moc_logowanie.cpp",
@@ -537,6 +543,7 @@
 	"SETTINGS_FILE" : "C:/Users/gabri/OneDrive/Documents/logowanie/build/Desktop_Qt_6_10_1_MinGW_64_bit-Debug/CMakeFiles/logowanie_autogen.dir/AutogenUsed.txt",
 	"SOURCES" : 
 	[
+		[ "C:/Users/gabri/OneDrive/Documents/logowanie/dodaj.cpp", "MU", null ],
 		[
 			"C:/Users/gabri/OneDrive/Documents/logowanie/logowanie.cpp",
 			"MU",

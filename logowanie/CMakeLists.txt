@@ -28,6 +28,8 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         MANUAL_FINALIZATION
         ${PROJECT_SOURCES}
         rejestracja.h rejestracja.cpp rejestracja.ui
+        dodaj.h dodaj.cpp dodaj.ui
+
     )
 # Define target properties for Android with Qt 6 as:
 #    set_property(TARGET logowanie APPEND PROPERTY QT_ANDROID_PACKAGE_SOURCE_DIR

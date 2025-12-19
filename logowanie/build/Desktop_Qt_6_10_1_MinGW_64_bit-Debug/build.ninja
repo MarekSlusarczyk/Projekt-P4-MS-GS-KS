@@ -81,6 +81,14 @@ build CMakeFiles/logowanie.dir/rejestracja.cpp.obj: CXX_COMPILER__logowanie_unsc
   OBJECT_DIR = CMakeFiles\logowanie.dir
   OBJECT_FILE_DIR = CMakeFiles\logowanie.dir
 
+build CMakeFiles/logowanie.dir/dodaj.cpp.obj: CXX_COMPILER__logowanie_unscanned_Debug C$:/Users/gabri/OneDrive/Documents/logowanie/dodaj.cpp || cmake_object_order_depends_target_logowanie
+  DEFINES = -DMINGW_HAS_SECURE_API=1 -DQT_CORE_LIB -DQT_GUI_LIB -DQT_NEEDS_QMAIN -DQT_SQL_LIB -DQT_WIDGETS_LIB -DUNICODE -DWIN32 -DWIN64 -D_ENABLE_EXTENDED_ALIGNED_STORAGE -D_UNICODE -D_WIN64
+  DEP_FILE = CMakeFiles\logowanie.dir\dodaj.cpp.obj.d
+  FLAGS = -DQT_QML_DEBUG -g -std=gnu++17 -fdiagnostics-color=always
+  INCLUDES = -IC:/Users/gabri/OneDrive/Documents/logowanie/build/Desktop_Qt_6_10_1_MinGW_64_bit-Debug/logowanie_autogen/include -isystem C:/Qt/6.10.1/mingw_64/include/QtCore -isystem C:/Qt/6.10.1/mingw_64/include -isystem C:/Qt/6.10.1/mingw_64/mkspecs/win32-g++ -isystem C:/Qt/6.10.1/mingw_64/include/QtWidgets -isystem C:/Qt/6.10.1/mingw_64/include/QtGui -isystem C:/Qt/6.10.1/mingw_64/include/QtSql
+  OBJECT_DIR = CMakeFiles\logowanie.dir
+  OBJECT_FILE_DIR = CMakeFiles\logowanie.dir
+
 
 # =============================================================================
 # Link build statements for EXECUTABLE target logowanie
@@ -89,7 +97,7 @@ build CMakeFiles/logowanie.dir/rejestracja.cpp.obj: CXX_COMPILER__logowanie_unsc
 #############################################
 # Link the executable logowanie.exe
 
-build logowanie.exe: CXX_EXECUTABLE_LINKER__logowanie_Debug CMakeFiles/logowanie.dir/logowanie_autogen/mocs_compilation.cpp.obj CMakeFiles/logowanie.dir/main.cpp.obj CMakeFiles/logowanie.dir/logowanie.cpp.obj CMakeFiles/logowanie.dir/rejestracja.cpp.obj | C$:/Qt/6.10.1/mingw_64/lib/libQt6Widgets.a C$:/Qt/6.10.1/mingw_64/lib/libQt6Sql.a C$:/Qt/6.10.1/mingw_64/lib/libQt6Gui.a C$:/Qt/6.10.1/mingw_64/lib/libQt6Core.a C$:/Qt/6.10.1/mingw_64/lib/libQt6EntryPoint.a || logowanie_autogen logowanie_autogen_timestamp_deps
+build logowanie.exe: CXX_EXECUTABLE_LINKER__logowanie_Debug CMakeFiles/logowanie.dir/logowanie_autogen/mocs_compilation.cpp.obj CMakeFiles/logowanie.dir/main.cpp.obj CMakeFiles/logowanie.dir/logowanie.cpp.obj CMakeFiles/logowanie.dir/rejestracja.cpp.obj CMakeFiles/logowanie.dir/dodaj.cpp.obj | C$:/Qt/6.10.1/mingw_64/lib/libQt6Widgets.a C$:/Qt/6.10.1/mingw_64/lib/libQt6Sql.a C$:/Qt/6.10.1/mingw_64/lib/libQt6Gui.a C$:/Qt/6.10.1/mingw_64/lib/libQt6Core.a C$:/Qt/6.10.1/mingw_64/lib/libQt6EntryPoint.a || logowanie_autogen logowanie_autogen_timestamp_deps
   FLAGS = -DQT_QML_DEBUG -g
   LINK_FLAGS = -mwindows
   LINK_LIBRARIES = C:/Qt/6.10.1/mingw_64/lib/libQt6Widgets.a  C:/Qt/6.10.1/mingw_64/lib/libQt6Sql.a  C:/Qt/6.10.1/mingw_64/lib/libQt6Gui.a  -ld3d11  -ldxgi  -ldxguid  -ld3d12  C:/Qt/6.10.1/mingw_64/lib/libQt6Core.a  -lmpr  -luserenv  -lmingw32  C:/Qt/6.10.1/mingw_64/lib/libQt6EntryPoint.a  -lshell32  -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
@@ -176,7 +184,7 @@ build logowanie_autogen_timestamp_deps: phony
 #############################################
 # Utility command for logowanie_autogen
 
-build logowanie_autogen: phony CMakeFiles/logowanie_autogen logowanie_autogen/include/ui_logowanie.h logowanie_autogen/include/ui_rejestracja.h logowanie_autogen/timestamp logowanie_autogen/mocs_compilation.cpp logowanie_autogen_timestamp_deps
+build logowanie_autogen: phony CMakeFiles/logowanie_autogen logowanie_autogen/include/ui_logowanie.h logowanie_autogen/include/ui_rejestracja.h logowanie_autogen/include/ui_dodaj.h logowanie_autogen/timestamp logowanie_autogen/mocs_compilation.cpp logowanie_autogen_timestamp_deps
 
 
 #############################################
@@ -193,7 +201,7 @@ build logowanie_autogen/timestamp logowanie_autogen/mocs_compilation.cpp | ${cma
 #############################################
 # Phony custom command for CMakeFiles\logowanie_autogen
 
-build CMakeFiles/logowanie_autogen logowanie_autogen/include/ui_logowanie.h logowanie_autogen/include/ui_rejestracja.h | ${cmake_ninja_workdir}CMakeFiles/logowanie_autogen ${cmake_ninja_workdir}logowanie_autogen/include/ui_logowanie.h ${cmake_ninja_workdir}logowanie_autogen/include/ui_rejestracja.h: phony logowanie_autogen/timestamp || logowanie_autogen_timestamp_deps
+build CMakeFiles/logowanie_autogen logowanie_autogen/include/ui_logowanie.h logowanie_autogen/include/ui_rejestracja.h logowanie_autogen/include/ui_dodaj.h | ${cmake_ninja_workdir}CMakeFiles/logowanie_autogen ${cmake_ninja_workdir}logowanie_autogen/include/ui_logowanie.h ${cmake_ninja_workdir}logowanie_autogen/include/ui_rejestracja.h ${cmake_ninja_workdir}logowanie_autogen/include/ui_dodaj.h: phony logowanie_autogen/timestamp || logowanie_autogen_timestamp_deps
 
 # =============================================================================
 # Target aliases.

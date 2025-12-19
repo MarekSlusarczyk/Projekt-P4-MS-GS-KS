@@ -935,11 +935,14 @@ logowanie_autogen/timestamp: \
 	C:/Users/gabri/OneDrive/Documents/logowanie/build/Desktop_Qt_6_10_1_MinGW_64_bit-Debug/CMakeFiles/3.30.5/CMakeRCCompiler.cmake \
 	C:/Users/gabri/OneDrive/Documents/logowanie/build/Desktop_Qt_6_10_1_MinGW_64_bit-Debug/CMakeFiles/3.30.5/CMakeSystem.cmake \
 	C:/Users/gabri/OneDrive/Documents/logowanie/build/Desktop_Qt_6_10_1_MinGW_64_bit-Debug/logowanie_autogen/moc_predefs.h \
+	C:/Users/gabri/OneDrive/Documents/logowanie/dodaj.cpp \
+	C:/Users/gabri/OneDrive/Documents/logowanie/dodaj.h \
 	C:/Users/gabri/OneDrive/Documents/logowanie/logowanie.cpp \
 	C:/Users/gabri/OneDrive/Documents/logowanie/logowanie.h \
 	C:/Users/gabri/OneDrive/Documents/logowanie/main.cpp \
 	C:/Users/gabri/OneDrive/Documents/logowanie/rejestracja.cpp \
 	C:/Users/gabri/OneDrive/Documents/logowanie/rejestracja.h \
+	C:/Users/gabri/OneDrive/Documents/logowanie/dodaj.ui \
 	C:/Users/gabri/OneDrive/Documents/logowanie/logowanie.ui \
 	C:/Users/gabri/OneDrive/Documents/logowanie/rejestracja.ui \
 	C:/Qt/Tools/CMake_64/bin/cmake.exe

@@ -90,6 +90,7 @@ public:
 
         lineEdit_haslo2 = new QLineEdit(groupBox);
         lineEdit_haslo2->setObjectName("lineEdit_haslo2");
+        lineEdit_haslo2->setEchoMode(QLineEdit::EchoMode::Password);
 
         horizontalLayout_3->addWidget(lineEdit_haslo2);
 

@@ -42,12 +42,16 @@ endif()
 file(GLOB_RECURSE NEW_GLOB LIST_DIRECTORIES false "C:/Users/gabri/OneDrive/Documents/logowanie/*.cpp")
 set(OLD_GLOB
   "C:/Users/gabri/OneDrive/Documents/logowanie/build/Desktop_Qt_6_10_1_MinGW_64_bit-Debug/CMakeFiles/3.30.5/CompilerIdCXX/CMakeCXXCompilerId.cpp"
+  "C:/Users/gabri/OneDrive/Documents/logowanie/build/Desktop_Qt_6_10_1_MinGW_64_bit-Debug/logowanie_autogen/EWIEGA46WW/moc_dodaj.cpp"
   "C:/Users/gabri/OneDrive/Documents/logowanie/build/Desktop_Qt_6_10_1_MinGW_64_bit-Debug/logowanie_autogen/EWIEGA46WW/moc_logowanie.cpp"
   "C:/Users/gabri/OneDrive/Documents/logowanie/build/Desktop_Qt_6_10_1_MinGW_64_bit-Debug/logowanie_autogen/EWIEGA46WW/moc_rejestracja.cpp"
   "C:/Users/gabri/OneDrive/Documents/logowanie/build/Desktop_Qt_6_10_1_MinGW_64_bit-Debug/logowanie_autogen/mocs_compilation.cpp"
   "C:/Users/gabri/OneDrive/Documents/logowanie/build/Desktop_Qt_6_9_3_MinGW_64_bit-Debug/CMakeFiles/3.30.5/CompilerIdCXX/CMakeCXXCompilerId.cpp"
   "C:/Users/gabri/OneDrive/Documents/logowanie/build/Desktop_Qt_6_9_3_MinGW_64_bit-Debug/logowanie_autogen/EWIEGA46WW/moc_logowanie.cpp"
   "C:/Users/gabri/OneDrive/Documents/logowanie/build/Desktop_Qt_6_9_3_MinGW_64_bit-Debug/logowanie_autogen/mocs_compilation.cpp"
+  "C:/Users/gabri/OneDrive/Documents/logowanie/dodaj.cpp"
+  "C:/Users/gabri/OneDrive/Documents/logowanie/dodawanie.cpp"
+  "C:/Users/gabri/OneDrive/Documents/logowanie/dodawanie/main.cpp"
   "C:/Users/gabri/OneDrive/Documents/logowanie/logowanie.cpp"
   "C:/Users/gabri/OneDrive/Documents/logowanie/main.cpp"
   "C:/Users/gabri/OneDrive/Documents/logowanie/rejestracja.cpp"
@@ -69,11 +73,13 @@ endif()
 # _directory_contents at C:/Qt/6.10.1/mingw_64/lib/cmake/Qt6LinguistTools/Qt6LinguistToolsMacros.cmake:55 (file)
 file(GLOB_RECURSE NEW_GLOB LIST_DIRECTORIES false "C:/Users/gabri/OneDrive/Documents/logowanie/*.h")
 set(OLD_GLOB
+  "C:/Users/gabri/OneDrive/Documents/logowanie/build/Desktop_Qt_6_10_1_MinGW_64_bit-Debug/logowanie_autogen/include/ui_dodaj.h"
   "C:/Users/gabri/OneDrive/Documents/logowanie/build/Desktop_Qt_6_10_1_MinGW_64_bit-Debug/logowanie_autogen/include/ui_logowanie.h"
   "C:/Users/gabri/OneDrive/Documents/logowanie/build/Desktop_Qt_6_10_1_MinGW_64_bit-Debug/logowanie_autogen/include/ui_rejestracja.h"
   "C:/Users/gabri/OneDrive/Documents/logowanie/build/Desktop_Qt_6_10_1_MinGW_64_bit-Debug/logowanie_autogen/moc_predefs.h"
   "C:/Users/gabri/OneDrive/Documents/logowanie/build/Desktop_Qt_6_9_3_MinGW_64_bit-Debug/logowanie_autogen/include/ui_logowanie.h"
   "C:/Users/gabri/OneDrive/Documents/logowanie/build/Desktop_Qt_6_9_3_MinGW_64_bit-Debug/logowanie_autogen/moc_predefs.h"
+  "C:/Users/gabri/OneDrive/Documents/logowanie/dodaj.h"
   "C:/Users/gabri/OneDrive/Documents/logowanie/logowanie.h"
   "C:/Users/gabri/OneDrive/Documents/logowanie/rejestracja.h"
   )
@@ -148,6 +154,7 @@ endif()
 # _directory_contents at C:/Qt/6.10.1/mingw_64/lib/cmake/Qt6LinguistTools/Qt6LinguistToolsMacros.cmake:55 (file)
 file(GLOB_RECURSE NEW_GLOB LIST_DIRECTORIES false "C:/Users/gabri/OneDrive/Documents/logowanie/*.qml")
 set(OLD_GLOB
+  "C:/Users/gabri/OneDrive/Documents/logowanie/dodawanie/main.qml"
   )
 if(NOT "${NEW_GLOB}" STREQUAL "${OLD_GLOB}")
   message("-- GLOB mismatch!")
@@ -157,6 +164,7 @@ endif()
 # _directory_contents at C:/Qt/6.10.1/mingw_64/lib/cmake/Qt6LinguistTools/Qt6LinguistToolsMacros.cmake:55 (file)
 file(GLOB_RECURSE NEW_GLOB LIST_DIRECTORIES false "C:/Users/gabri/OneDrive/Documents/logowanie/*.qrc")
 set(OLD_GLOB
+  "C:/Users/gabri/OneDrive/Documents/logowanie/dodawanie/qml.qrc"
   )
 if(NOT "${NEW_GLOB}" STREQUAL "${OLD_GLOB}")
   message("-- GLOB mismatch!")
@@ -177,6 +185,7 @@ endif()
 # _directory_contents at C:/Qt/6.10.1/mingw_64/lib/cmake/Qt6LinguistTools/Qt6LinguistToolsMacros.cmake:55 (file)
 file(GLOB_RECURSE NEW_GLOB LIST_DIRECTORIES false "C:/Users/gabri/OneDrive/Documents/logowanie/*.ui")
 set(OLD_GLOB
+  "C:/Users/gabri/OneDrive/Documents/logowanie/dodaj.ui"
   "C:/Users/gabri/OneDrive/Documents/logowanie/logowanie.ui"
   "C:/Users/gabri/OneDrive/Documents/logowanie/rejestracja.ui"
   )

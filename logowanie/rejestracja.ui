@@ -70,7 +70,11 @@
          </widget>
         </item>
         <item>
-         <widget class="QLineEdit" name="lineEdit_haslo2"/>
+         <widget class="QLineEdit" name="lineEdit_haslo2">
+          <property name="echoMode">
+           <enum>QLineEdit::EchoMode::Password</enum>
+          </property>
+         </widget>
         </item>
        </layout>
       </item>

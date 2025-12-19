@@ -1,0 +1,22 @@
+{
+	"BUILD_DIR" : "C:/Users/gabri/OneDrive/Documents/logowanie/build/Desktop_Qt_6_10_1_MinGW_64_bit-Debug/dodawanie/dodawanie_autogen",
+	"CMAKE_BINARY_DIR" : "C:/Users/gabri/OneDrive/Documents/logowanie/build/Desktop_Qt_6_10_1_MinGW_64_bit-Debug",
+	"CMAKE_CURRENT_BINARY_DIR" : "C:/Users/gabri/OneDrive/Documents/logowanie/build/Desktop_Qt_6_10_1_MinGW_64_bit-Debug/dodawanie",
+	"CMAKE_CURRENT_SOURCE_DIR" : "C:/Users/gabri/OneDrive/Documents/logowanie/dodawanie",
+	"CMAKE_SOURCE_DIR" : "C:/Users/gabri/OneDrive/Documents/logowanie",
+	"CROSS_CONFIG" : false,
+	"GENERATOR" : "Ninja",
+	"INCLUDE_DIR" : "C:/Users/gabri/OneDrive/Documents/logowanie/build/Desktop_Qt_6_10_1_MinGW_64_bit-Debug/dodawanie/dodawanie_autogen/include",
+	"INPUTS" : [ "C:/Users/gabri/OneDrive/Documents/logowanie/dodawanie/main.qml" ],
+	"LOCK_FILE" : "C:/Users/gabri/OneDrive/Documents/logowanie/build/Desktop_Qt_6_10_1_MinGW_64_bit-Debug/dodawanie/CMakeFiles/dodawanie_autogen.dir/AutoRcc_qml_EWIEGA46WW_Lock.lock",
+	"MULTI_CONFIG" : false,
+	"OPTIONS" : [ "--no-zstd", "-name", "qml" ],
+	"OUTPUT_CHECKSUM" : "EWIEGA46WW",
+	"OUTPUT_NAME" : "qrc_qml.cpp",
+	"RCC_EXECUTABLE" : "C:/Qt/6.10.1/mingw_64/bin/rcc.exe",
+	"RCC_LIST_OPTIONS" : [ "--list" ],
+	"SETTINGS_FILE" : "C:/Users/gabri/OneDrive/Documents/logowanie/build/Desktop_Qt_6_10_1_MinGW_64_bit-Debug/dodawanie/CMakeFiles/dodawanie_autogen.dir/AutoRcc_qml_EWIEGA46WW_Used.txt",
+	"SOURCE" : "C:/Users/gabri/OneDrive/Documents/logowanie/dodawanie/qml.qrc",
+	"USE_BETTER_GRAPH" : true,
+	"VERBOSITY" : 0
+}

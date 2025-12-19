@@ -3,6 +3,11 @@
 #include <QMessageBox>
 #include <QSqlQuery>
 #include <QSqlError>
+#include <QDebug>
+
+extern QString loginglo;
+
+
 rejestracja::rejestracja(QWidget *parent)
     : QDialog(parent)
     , ui(new Ui::rejestracja)
@@ -41,7 +46,7 @@ void rejestracja::on_pushButton_zaloguj_clicked()
         QMessageBox::critical(this, "Błąd", db.lastError().text());
     }
     }else{
-    QMessageBox::warning(this,"Bład","Hasła nie są takie sa,e");
+    QMessageBox::warning(this,"Bład","Hasła nie są takie same");
     }
 }
 

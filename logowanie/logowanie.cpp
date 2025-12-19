@@ -3,6 +3,7 @@
 #include <QMessageBox>
 #include <QSqlQuery>
 
+QString loginglo = "nazwa";
 logowanie::logowanie(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::logowanie)
@@ -20,6 +21,7 @@ void logowanie::on_pushButton_zaloguj_clicked()
     QSqlDatabase db = QSqlDatabase::addDatabase("QODBC");
     db.setDatabaseName("Driver={MySQL ODBC 9.5 Unicode Driver};Server=localhost;Database=aplikacja;Uid=root;Pwd=;");
     QString login = ui->lineEdit_login->text();
+    loginglo = ui->lineEdit_login->text();
     QString haslo = ui->lineEdit_haslo->text();
 
     if(db.open()){
