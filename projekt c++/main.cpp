@@ -1,38 +1,43 @@
-#include <iostream>
+ï»¿#include <iostream>
 #include <string>
 #include "logrej.h"
-#include <clocale>
+
 using namespace std;
 
+#ifdef _WIN32
+#define SYSTEM system("chcp 1250 > null");
+
+#elif _WIN64
+#define SYSTEM system("chcp 1250 > null");
+
+#endif
+
 int main() {
-setlocale(LC_ALL, "Polish");
-    int wybor = 0;
+	SYSTEM;
+	int wybor = 0;
 	SystemLogowania system;
 	while (true) {
 		cout << "MENU" << endl;
-    	cout << "--------------" << endl;
-    	cout << "1.Logowanie" << endl;
-    	cout << "2.Rejestracja" << endl;
-		cout << "3.Wyjœcie" << endl;
-    	cout << "--------------" << endl;
-    	cin >> wybor;
-    	switch (wybor) {
-			case 1:
-				if(system.logowanie() == true) {
-				cout << "Witaj w aplikacji!" << endl;
-				}else{
-				  cout << "Niepoprawny login lub has³o" << endl;
-				}
-				break;
-        	case 2:
-            	system.rejestracja();
-				break;
-
-
-			case 3:
-				break;
-
-    	}
+		cout << "--------------" << endl;
+		cout << "1. Logowanie" << endl;
+		cout << "2. Rejestracja" << endl;
+		cout << "3. WyjÅ›cie" << endl;
+		cout << "--------------" << endl;
+		cin >> wybor;
+		switch (wybor) {
+		case 1:
+			if (system.logowanie()) {
+				cout << "Witaj w aplikacji! Zalogowano jako: " << system.u.zwrocLogin() << endl;
+			}
+			else {
+				cout << "Niepoprawny login lub hasÅ‚o" << endl;
+			}
+			break;
+		case 2:
+			system.rejestracja();
+			break;
+		case 3:
+			return 0;
+		}
 	}
-
 }

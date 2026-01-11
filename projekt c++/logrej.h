@@ -1,56 +1,85 @@
 #include <iostream>
 #include <string>
 #include <fstream>
+
 using namespace std;
+
 class Uzytkownik {
-    public:
+public:
     string login;
     string haslo;
+
+    string zwrocLogin() const {
+        return this->login;
+    }
 };
 
-
 class SystemLogowania {
-    public:
+public:
     Uzytkownik u;
+
     void rejestracja() {
-        string haslo2=" ";
-        cout << "Podaj login: ";
-        cin >> u.login;
-        cout << endl;
-        while (u.haslo != haslo2) {
+        string sprawdzenieLogin, sprawdzenieHaslo;
+        bool zajety = false;
+        do {
+            zajety = false;
+            cout << "Podaj login: ";
+            cin >> u.login;
+
+            ifstream plikOdczyt("uzytkownicy.txt");
+            if (plikOdczyt.is_open()) {
+                while (plikOdczyt >> sprawdzenieLogin >> sprawdzenieHaslo) {
+                    if (sprawdzenieLogin == u.login) {
+                        zajety = true;
+                        break;
+                    }
+                }
+                plikOdczyt.close();
+            }
+
+            if (zajety) {
+                cout << "B³¹d: U¿ytkownik o takim loginie ju¿ istnieje!" << endl;
+            }
+        } while (zajety);
+
+        string haslo2 = "";
+        while (true) {
             cout << "Podaj has³o: ";
             cin >> u.haslo;
-            cout << endl;
-            cout << "Powtórz has³o: ";
+            cout << "Powtorz has³o: ";
             cin >> haslo2;
+
             if (u.haslo != haslo2) {
-                cout << "B³¹d! Has³a siê nie s¹ takie same" << endl;
-            }else {
-                ofstream plik("uzytkownicy.txt", ios::app);
-                plik << u.login << " " << u.haslo << endl;
-                plik.close();
-                cout << "Konto zosta³o utworzone!" << endl;
+                cout << "B³¹d! Has³a nie s¹ takie same." << endl;
+            }
+            else {
+                ofstream plikZapis("uzytkownicy.txt", ios::app);
+                if (plikZapis.is_open()) {
+                    plikZapis << u.login << " " << u.haslo << endl;
+                    plikZapis.close();
+                    cout << "Konto zosta³o utworzone!" << endl;
+                }
                 break;
             }
         }
     }
-        bool logowanie(){
-            string l,h, plikL, plikH;
-            cout << "Podaj login: ";
-            cin >> l;
-            cout << endl;
-            cout << "Podaj has³o: ";
-            cin >> h;
-            ifstream plik("uzytkownicy.txt");
-             while (plik >> plikL >> plikH) {
-                 if (plikL == l && plikH == h) {
-                     plik.close();
-                     return true;
-                 }
-             }
-                    plik.close();
-                    return false;
-                }
 
-    };
+    bool logowanie() {
+        string login, haslo, plikLogin, plikHaslo;
+        cout << "Podaj login: ";
+        cin >> login;
+        cout << "Podaj haslo: ";
+        cin >> haslo;
 
+        ifstream plik("uzytkownicy.txt");
+        while (plik >> plikLogin >> plikHaslo) {
+            if (plikLogin == login && plikHaslo == haslo) {
+                u.login = login;
+                plik.close();
+                return true;
+            }
+        }
+        plik.close();
+        return false;
+    }
+};
