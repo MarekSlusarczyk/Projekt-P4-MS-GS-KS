@@ -53,7 +53,7 @@ void mainMenu(SystemLogowania& system) {
 		switch (wybor) {
 		case 1:
 			if (system.logowanie()) {
-				cout << "Witaj w aplikacji! Zalogowano jako: " << system.u.zwrocLogin() << endl;
+				cout << "\n\nWitaj w OLX! Zalogowano jako: " << system.u.zwrocNazweUzytkownika() << endl;
 			}
 			else {
 				cout << "Niepoprawny login lub hasło" << endl;
@@ -71,7 +71,7 @@ void mainMenu(SystemLogowania& system) {
 void appMenu(SystemLogowania& system, Ogloszenie**& tablica, int& licznik, int& maxRozmiar) {
 	int wybor = 0;
 	while (system.czyZalogowany()) {
-		cout << "MENU OLX (Zalogowany jako: " << system.u.zwrocNazweUzytkownika() << ")" << endl;
+		cout << "\n\nMENU OLX" << endl;
 		cout << "--------------" << endl;
 		cout << "1. Przeglądaj wszystkie ogłoszenia" << endl;
 		cout << "2. Filtruj ogłoszenia według kategorii" << endl;
@@ -83,24 +83,43 @@ void appMenu(SystemLogowania& system, Ogloszenie**& tablica, int& licznik, int& 
         switch (wybor) {
         case 1: {
             cout << "\n--- AKTUALNE OFERTY ---" << endl;
+            int wyswietlono = 0;
+
             for (int i = 0; i < licznik; i++) {
-                if (tablica[i]->zwrocStatus() == 0) tablica[i]->wyswietl();
+                if (tablica[i]->zwrocStatus() == 0) {
+                    tablica[i]->wyswietl();
+                    wyswietlono++;
+                }
+            }
+
+            if (wyswietlono == 0) {
+                cout << "Obecnie nie ma żadnych dostępnych ofert." << endl;
             }
             break;
         }
         case 2: {
             cout << "Wybierz kategorię (1 - Motoryzacja, 2 - Elektronika): ";
-            int kat; cin >> kat;
+            int kat; 
+            cin >> kat;
             string szukana = (kat == 1) ? "Motoryzacja" : "Elektronika";
+
+            int wyswietlono = 0;
+            cout << "\n--- OFERTY Z KATEGORII: " << szukana << " ---" << endl;
+
             for (int i = 0; i < licznik; i++) {
                 if (tablica[i]->zwrocKategorie() == szukana && tablica[i]->zwrocStatus() == 0) {
                     tablica[i]->wyswietl();
+                    wyswietlono++;
                 }
+            }
+
+            if (wyswietlono == 0) {
+                cout << "Brak aktywnych ogłoszeń w tej kategorii." << endl;
             }
             break;
         }
         case 3: {
-            cout << "\n--- TWOJE OGŁOSZENIA ---" << endl;
+            cout << "\n--- TWOJE AKTYWNE OGŁOSZENIA ---" << endl;
             bool znaleziono = false;
             for (int i = 0; i < licznik; i++) {
                 if (tablica[i]->zwrocWlasciciela() == system.u.zwrocLogin() && tablica[i]->zwrocStatus() == 0) {
@@ -109,16 +128,47 @@ void appMenu(SystemLogowania& system, Ogloszenie**& tablica, int& licznik, int& 
                     znaleziono = true;
                 }
             }
+
             if (znaleziono) {
-                cout << "Podaj ID do usunięcia (lub -1 żeby wrócić): ";
-                int id; 
-                cin >> id;
+                cout << "Podaj ID ogłoszenia do zarządzania (lub -1 żeby wrócić): ";
+                int id; cin >> id;
                 if (id >= 0 && id < licznik && tablica[id]->zwrocWlasciciela() == system.u.zwrocLogin()) {
-                    tablica[id]->ustawStatus(2);
-                    cout << "Ogłoszenie zostało usunięte (ukryte)." << endl;
+                    cout << "1. Edytuj ogłoszenie\n2. Usuń ogłoszenie\nWybór: ";
+                    int akcja; cin >> akcja;
+
+                    if (akcja == 1) {
+                        // EDYCJA
+                        string t, l, o; float c;
+                        cin.ignore();
+                        cout << "Nowy tytuł: "; getline(cin, t);
+                        cout << "Nowa lokalizacja: "; getline(cin, l);
+                        cout << "Nowy opis: "; getline(cin, o);
+                        cout << "Nowa cena: "; cin >> c;
+
+                        tablica[id]->edytujDaneBazowe(t, l, o, c);
+
+                        // Edycja pola specyficznego dla klasy (rzutowanie typu)
+                        if (tablica[id]->zwrocKategorie() == "Motoryzacja") {
+                            int p; cout << "Nowy przebieg: "; cin >> p;
+                            // Rzutowanie wskaźnika, aby dostać się do metody klasy pochodnej
+                            static_cast<Motoryzacja*>(tablica[id])->ustawPrzebieg(p);
+                        }
+                        else {
+                            string s; cout << "Nowy stan: "; cin.ignore(); getline(cin, s);
+                            static_cast<Elektronika*>(tablica[id])->ustawStan(s);
+                        }
+                        cout << "Ogłoszenie zaktualizowane!" << endl;
+                    }
+                    else if (akcja == 2) {
+                        // USUNIĘCIE
+                        tablica[id]->ustawStatus(2);
+                        cout << "Ogłoszenie usunięte." << endl;
+                    }
+
+                    zapiszDoPliku(tablica, licznik); // Zapisujemy zmiany do pliku
                 }
             }
-            else cout << "Nie masz aktywnych ogłoszeń." << endl;
+            else cout << "Brak ogłoszeń do wyświetlenia." << endl;
             break;
         }
         case 4: {
@@ -128,7 +178,7 @@ void appMenu(SystemLogowania& system, Ogloszenie**& tablica, int& licznik, int& 
 
             int kat;
             string t, l, o, cecha; float c;
-            cout << "Kategoria (1-Auto, 2-Elektronika): "; cin >> kat;
+            cout << "Kategoria (1-Motoryzacja, 2-Elektronika): "; cin >> kat;
             cin.ignore();
             cout << "Tytuł: "; getline(cin, t);
             cout << "Lokalizacja: "; getline(cin, l);
