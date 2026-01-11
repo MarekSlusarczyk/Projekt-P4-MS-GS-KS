@@ -15,6 +15,7 @@ public:
 };
 
 class SystemLogowania {
+    bool zalogowany = false;
 public:
     Uzytkownik u;
 
@@ -75,11 +76,21 @@ public:
         while (plik >> plikLogin >> plikHaslo) {
             if (plikLogin == login && plikHaslo == haslo) {
                 u.login = login;
+                this->zalogowany = true;
                 plik.close();
                 return true;
             }
         }
         plik.close();
         return false;
+    };
+
+    bool czyZalogowany() {
+        return this->zalogowany;
+    }
+
+    void wyloguj() {
+        this->zalogowany = false;
+        cout << "Wylogowano pomyœlnie" << endl;
     }
 };

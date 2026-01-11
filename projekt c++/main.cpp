@@ -12,12 +12,25 @@ using namespace std;
 
 #endif
 
+void mainMenu(SystemLogowania& system);
+void appMenu(SystemLogowania& system);
+
 int main() {
 	SYSTEM;
 	int wybor = 0;
 	SystemLogowania system;
-	while (true) {
-		cout << "MENU" << endl;
+
+	mainMenu(system);
+
+	appMenu(system);
+
+	return 0;
+}
+
+void mainMenu(SystemLogowania& system) {
+	int wybor = 0;
+	while (!system.czyZalogowany()) {
+		cout << "MENU LOGOWANIA" << endl;
 		cout << "--------------" << endl;
 		cout << "1. Logowanie" << endl;
 		cout << "2. Rejestracja" << endl;
@@ -37,7 +50,28 @@ int main() {
 			system.rejestracja();
 			break;
 		case 3:
-			return 0;
+			exit(0);
+		}
+	}
+}
+
+void appMenu(SystemLogowania& system) {
+	int wybor = 0;
+	while (system.czyZalogowany()) {
+		cout << "MENU" << endl;
+		cout << "--------------" << endl;
+		cout << "1. Przeglądaj produkty" << endl;
+		cout << "2. Twoje produkty" << endl;
+		cout << "3. Wystaw na sprzedaż" << endl;
+		cout << "4. Wyloguj się" << endl;
+		cout << "--------------" << endl;
+		cin >> wybor;
+		switch (wybor) {
+
+		case 4:
+			system.wyloguj();
+			mainMenu(system);
+			break;
 		}
 	}
 }
