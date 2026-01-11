@@ -6,9 +6,18 @@ string Uzytkownik::zwrocLogin() const {
     return this->login;
 }
 
+string Uzytkownik::zwrocNazweUzytkownika() const {
+    return this->nazwaUzytkownika;
+}
+
 void SystemLogowania::rejestracja() {
     string linia, plikLogin, plikHaslo;
     bool zajety = false;
+
+    cout << "Podaj wyœwietlan¹ nazwê u¿ytkownika (np. Imiê Nazwisko): ";
+    cin.ignore();
+    getline(cin, u.nazwaUzytkownika);
+
     do {
         zajety = false;
         cout << "Podaj login: ";
@@ -45,7 +54,7 @@ void SystemLogowania::rejestracja() {
         else {
             ofstream plikZapis("uzytkownicy.txt", ios::app);
             if (plikZapis.is_open()) {
-                plikZapis << u.login << ";" << u.haslo << endl;
+                plikZapis << u.login << ";" << u.haslo << ";" << u.nazwaUzytkownika << endl;
                 plikZapis.close();
                 cout << "Konto zosta³o utworzone!" << endl;
             }
@@ -55,7 +64,7 @@ void SystemLogowania::rejestracja() {
 }
 
 bool SystemLogowania::logowanie() {
-    string loginInput, hasloInput, linia, plikLogin, plikHaslo;
+    string loginInput, hasloInput, linia, plikLogin, plikHaslo, plikNazwaUzytkownika;
     cout << "Podaj login: ";
     cin >> loginInput;
     cout << "Podaj has³o: ";
@@ -67,9 +76,11 @@ bool SystemLogowania::logowanie() {
             stringstream ss(linia);
             getline(ss, plikLogin, ';');
             getline(ss, plikHaslo, ';');
+            getline(ss, plikNazwaUzytkownika, ';');
 
             if (plikLogin == loginInput && plikHaslo == hasloInput) {
                 u.login = loginInput;
+                u.nazwaUzytkownika = plikNazwaUzytkownika;
                 this->zalogowany = true;
                 plik.close();
                 return true;
