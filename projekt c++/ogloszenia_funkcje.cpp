@@ -33,7 +33,13 @@ void wczytajZPliku(Ogloszenie**& tablica, int& licznik, int& maxRozmiar) {
     string linia, kat, t, l, o, wl, cenaStr, statusStr, cechaSpec;
 
     if (plik.is_open()) {
-        while (getline(plik, linia) && licznik < 100) {
+        while (getline(plik, linia)) {
+            if (linia.empty()) continue;
+
+            if (licznik >= maxRozmiar) {
+                powiekszTablice(tablica, maxRozmiar);
+            }
+
             stringstream ss(linia);
 
             getline(ss, kat, ';');
@@ -45,25 +51,48 @@ void wczytajZPliku(Ogloszenie**& tablica, int& licznik, int& maxRozmiar) {
             getline(ss, statusStr, ';');
             getline(ss, cechaSpec, ';');
 
-            float c = stof(cenaStr);
-            int sO = stoi(statusStr);
+            try {
+                float c = stof(cenaStr);
+                int sO = stoi(statusStr);
 
-            if (kat == "Motoryzacja") {
-                int p = stoi(cechaSpec);
-                tablica[licznik] = new Motoryzacja(t, l, o, wl, c, sO, p);
-            }
-            else if (kat == "Elektronika") {
-                tablica[licznik] = new Elektronika(t, l, o, wl, c, sO, cechaSpec);
-            }
+                if (kat == "Motoryzacja") {
+                    int p = stoi(cechaSpec);
+                    tablica[licznik] = new Motoryzacja(t, l, o, wl, c, sO, p);
+                }
+                else if (kat == "Elektronika") {
+                    tablica[licznik] = new Elektronika(t, l, o, wl, c, sO, cechaSpec);
+                }
 
-            licznik++;
+                licznik++;
+            }
+            catch (...) {
+                continue;
+            }
         }
         plik.close();
     }
 }
-
 void czyszczeniePamieci(Ogloszenie** tablica, int licznik) {
     for (int i = 0; i < licznik; i++) {
         delete tablica[i];
     }
+}
+
+string znajdzNazwePoLoginie(string login) {
+    ifstream plik("uzytkownicy.txt");
+    string linia, pLogin, pHadlo, pNazwa;
+    if (plik.is_open()) {
+        while (getline(plik, linia)) {
+            stringstream ss(linia);
+            getline(ss, pLogin, ';');
+            getline(ss, pHadlo, ';');
+            getline(ss, pNazwa, ';');
+            if (pLogin == login) {
+                plik.close();
+                return pNazwa;
+            }
+        }
+        plik.close();
+    }
+    return login;
 }

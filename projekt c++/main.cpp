@@ -87,7 +87,8 @@ void appMenu(SystemLogowania& system, Ogloszenie**& tablica, int& licznik, int& 
 
             for (int i = 0; i < licznik; i++) {
                 if (tablica[i]->zwrocStatus() == 0) {
-                    tablica[i]->wyswietl();
+                    string nazwaDoPokazania = znajdzNazwePoLoginie(tablica[i]->zwrocWlasciciela());
+                    tablica[i]->wyswietl(nazwaDoPokazania);
                     wyswietlono++;
                 }
             }
@@ -108,7 +109,8 @@ void appMenu(SystemLogowania& system, Ogloszenie**& tablica, int& licznik, int& 
 
             for (int i = 0; i < licznik; i++) {
                 if (tablica[i]->zwrocKategorie() == szukana && tablica[i]->zwrocStatus() == 0) {
-                    tablica[i]->wyswietl();
+                    string nazwaDoPokazania = znajdzNazwePoLoginie(tablica[i]->zwrocWlasciciela());
+                    tablica[i]->wyswietl(nazwaDoPokazania);
                     wyswietlono++;
                 }
             }
@@ -124,20 +126,21 @@ void appMenu(SystemLogowania& system, Ogloszenie**& tablica, int& licznik, int& 
             for (int i = 0; i < licznik; i++) {
                 if (tablica[i]->zwrocWlasciciela() == system.u.zwrocLogin() && tablica[i]->zwrocStatus() == 0) {
                     cout << "ID: [" << i << "] ";
-                    tablica[i]->wyswietl();
+                    tablica[i]->wyswietl(system.u.zwrocNazweUzytkownika());
                     znaleziono = true;
                 }
             }
 
             if (znaleziono) {
                 cout << "Podaj ID ogłoszenia do zarządzania (lub -1 żeby wrócić): ";
-                int id; cin >> id;
+                int id; 
+                cin >> id;
                 if (id >= 0 && id < licznik && tablica[id]->zwrocWlasciciela() == system.u.zwrocLogin()) {
                     cout << "1. Edytuj ogłoszenie\n2. Usuń ogłoszenie\nWybór: ";
-                    int akcja; cin >> akcja;
+                    int akcja; 
+                    cin >> akcja;
 
                     if (akcja == 1) {
-                        // EDYCJA
                         string t, l, o; float c;
                         cin.ignore();
                         cout << "Nowy tytuł: "; getline(cin, t);
@@ -147,25 +150,26 @@ void appMenu(SystemLogowania& system, Ogloszenie**& tablica, int& licznik, int& 
 
                         tablica[id]->edytujDaneBazowe(t, l, o, c);
 
-                        // Edycja pola specyficznego dla klasy (rzutowanie typu)
                         if (tablica[id]->zwrocKategorie() == "Motoryzacja") {
-                            int p; cout << "Nowy przebieg: "; cin >> p;
-                            // Rzutowanie wskaźnika, aby dostać się do metody klasy pochodnej
+                            int p; cout << "Nowy przebieg: "; 
+                            cin >> p;
                             static_cast<Motoryzacja*>(tablica[id])->ustawPrzebieg(p);
                         }
                         else {
-                            string s; cout << "Nowy stan: "; cin.ignore(); getline(cin, s);
+                            string s; 
+                            cout << "Nowy stan: "; 
+                            cin.ignore(); 
+                            getline(cin, s);
                             static_cast<Elektronika*>(tablica[id])->ustawStan(s);
                         }
                         cout << "Ogłoszenie zaktualizowane!" << endl;
                     }
                     else if (akcja == 2) {
-                        // USUNIĘCIE
                         tablica[id]->ustawStatus(2);
                         cout << "Ogłoszenie usunięte." << endl;
                     }
 
-                    zapiszDoPliku(tablica, licznik); // Zapisujemy zmiany do pliku
+                    zapiszDoPliku(tablica, licznik);
                 }
             }
             else cout << "Brak ogłoszeń do wyświetlenia." << endl;

@@ -18,7 +18,7 @@ public:
     Ogloszenie(string t, string l, string o, string d, float c, int sO) : tytul(t), lokalizacja(l), opis(o), dodanePrzez(d), cena(c), statusOgloszenia(sO) {}
 
     virtual ~Ogloszenie() {}
-    virtual void wyswietl() = 0;
+    virtual void wyswietl(string nazwaWyswietlana) = 0;
     virtual string zwrocKategorie() = 0;
     string zwrocWlasciciela() { 
         return dodanePrzez; 
@@ -43,8 +43,8 @@ class Motoryzacja : public Ogloszenie {
 public:
     Motoryzacja(string t, string l, string o, string d, float c, int sO, int p) : Ogloszenie(t, l, o, d, c, sO), przebieg(p) {}
 
-    void wyswietl() override {
-        cout << "[MOTORYZACJA] " << endl;
+    void wyswietl(string nazwaWyswietlana) override {
+        cout << "[MOTORYZACJA] | Sprzedaj¹cy: " << nazwaWyswietlana << endl;
         cout << "Tytu³: " << tytul << endl;
         cout << "Opis: " << opis << endl;
         cout << "Cena: " << cena << " z³" << endl;
@@ -67,8 +67,8 @@ class Elektronika : public Ogloszenie {
 public:
     Elektronika(string t, string l, string o, string d, float c, int sO, string s) : Ogloszenie(t, l, o, d, c, sO), stan(s) {}
 
-    void wyswietl() override {
-        cout << "[ELEKTRONIKA]" << endl;
+    void wyswietl(string nazwaWyswietlana) override {
+        cout << "[ELEKTRONIKA] | Sprzedaj¹cy: " << nazwaWyswietlana << endl;
         cout << "Tytu³: " << tytul << endl;
         cout << "Opis: " << opis << endl;
         cout << "Cena: " << cena << " z³" << endl;
