@@ -1,12 +1,13 @@
 #include "logrej.h"
 #include <fstream>
+#include <sstream>
 
 string Uzytkownik::zwrocLogin() const {
     return this->login;
 }
 
 void SystemLogowania::rejestracja() {
-    string sprawdzenieLogin, sprawdzenieHaslo;
+    string linia, plikLogin, plikHaslo;
     bool zajety = false;
     do {
         zajety = false;
@@ -15,8 +16,10 @@ void SystemLogowania::rejestracja() {
 
         ifstream plikOdczyt("uzytkownicy.txt");
         if (plikOdczyt.is_open()) {
-            while (plikOdczyt >> sprawdzenieLogin >> sprawdzenieHaslo) {
-                if (sprawdzenieLogin == u.login) {
+            while (getline(plikOdczyt, linia)) {
+                stringstream ss(linia);
+                getline(ss, plikLogin, ';');
+                if (plikLogin == u.login) {
                     zajety = true;
                     break;
                 }
@@ -33,7 +36,7 @@ void SystemLogowania::rejestracja() {
     while (true) {
         cout << "Podaj has³o: ";
         cin >> u.haslo;
-        cout << "Powtorz has³o: ";
+        cout << "Powtórz has³o: ";
         cin >> haslo2;
 
         if (u.haslo != haslo2) {
@@ -42,7 +45,7 @@ void SystemLogowania::rejestracja() {
         else {
             ofstream plikZapis("uzytkownicy.txt", ios::app);
             if (plikZapis.is_open()) {
-                plikZapis << u.login << " " << u.haslo << endl;
+                plikZapis << u.login << ";" << u.haslo << endl;
                 plikZapis.close();
                 cout << "Konto zosta³o utworzone!" << endl;
             }
@@ -52,22 +55,28 @@ void SystemLogowania::rejestracja() {
 }
 
 bool SystemLogowania::logowanie() {
-    string loginInput, hasloInput, plikLogin, plikHaslo;
+    string loginInput, hasloInput, linia, plikLogin, plikHaslo;
     cout << "Podaj login: ";
     cin >> loginInput;
     cout << "Podaj has³o: ";
     cin >> hasloInput;
 
     ifstream plik("uzytkownicy.txt");
-    while (plik >> plikLogin >> plikHaslo) {
-        if (plikLogin == loginInput && plikHaslo == hasloInput) {
-            u.login = loginInput;
-            this->zalogowany = true;
-            plik.close();
-            return true;
+    if (plik.is_open()) {
+        while (getline(plik, linia)) {
+            stringstream ss(linia);
+            getline(ss, plikLogin, ';');
+            getline(ss, plikHaslo, ';');
+
+            if (plikLogin == loginInput && plikHaslo == hasloInput) {
+                u.login = loginInput;
+                this->zalogowany = true;
+                plik.close();
+                return true;
+            }
         }
+        plik.close();
     }
-    plik.close();
     return false;
 }
 
@@ -77,5 +86,6 @@ bool SystemLogowania::czyZalogowany() {
 
 void SystemLogowania::wyloguj() {
     this->zalogowany = false;
+    this->u.login = "";
     cout << "Wylogowano pomyœlnie" << endl;
 }
