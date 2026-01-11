@@ -60,8 +60,8 @@ void appMenu(SystemLogowania& system) {
 	while (system.czyZalogowany()) {
 		cout << "MENU" << endl;
 		cout << "--------------" << endl;
-		cout << "1. Przeglądaj produkty" << endl;
-		cout << "2. Twoje produkty" << endl;
+		cout << "1. Przeglądaj wszystkie ogłoszenia" << endl;
+		cout << "2. Twoje ogłoszenia" << endl;
 		cout << "3. Wystaw na sprzedaż" << endl;
 		cout << "4. Wyloguj się" << endl;
 		cout << "--------------" << endl;
