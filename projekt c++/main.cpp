@@ -275,22 +275,57 @@ void appMenu(SystemLogowania& system, Ogloszenie**& tablica, int& licznik, int& 
 
                         if (akcja == 1) {
                             string t, l, o; float c;
+                            bool poprawnaCena = false;
                             cin.ignore();
                             cout << "Nowy tytuł: "; getline(cin, t);
                             cout << "Nowa lokalizacja: "; getline(cin, l);
                             cout << "Nowy opis: "; getline(cin, o);
-                            cout << "Nowa cena: "; 
-                            cin >> c;
+                            do {
+                                cout << "Nowa cena: ";
+                                if (!(cin >> c)) {
+                                    cout << "Błąd: Cena musi być liczbą (użyj kropki dla groszy)!" << endl;
+                                    cin.clear();            
+                                    cin.ignore(1000, '\n');
+                                    continue;
+                                }
+
+                                if (c >= 0) {
+                                    poprawnaCena = true;
+                                }
+                                else {
+                                    cout << "Błąd: Cena nie może być ujemna!" << endl;
+                                }
+
+                            } while (!poprawnaCena);
 
                             tablica[id]->edytujDaneBazowe(t, l, o, c);
 
                             if (tablica[id]->zwrocKategorie() == "Motoryzacja") {
-                                int p; cout << "Nowy przebieg: "; 
-                                cin >> p;
+                                int p;
+                                bool poprawnyPrzebieg = false;
+                                do {
+                                    cout << "Nowy przebieg: ";
+                                    if (!(cin >> p)) {
+                                        cout << "Błąd: Przebieg musi być liczbą!" << endl;
+                                        cin.clear();
+                                        cin.ignore(1000, '\n');
+                                        continue;
+                                    }
+
+                                    if (p >= 0) {
+                                        poprawnyPrzebieg = true;
+                                    }
+                                    else {
+                                        cout << "Błąd: Przebieg nie może być ujemny!" << endl;
+                                    }
+
+                                } while (!poprawnyPrzebieg);
                                 static_cast<Motoryzacja*>(tablica[id])->ustawPrzebieg(p);
                             }
                             else {
-                                string s; cout << "Nowy stan: "; cin.ignore(); getline(cin, s);
+                                string s; cout << "Nowy stan: "; 
+                                cin.ignore(); 
+                                getline(cin, s);
                                 static_cast<Elektronika*>(tablica[id])->ustawStan(s);
                             }
                             cout << "\n---------------------------------" << endl;
@@ -321,19 +356,64 @@ void appMenu(SystemLogowania& system, Ogloszenie**& tablica, int& licznik, int& 
             }
 
             int kat;
-            string t, l, o, cecha; float c;
-            cout << "Kategoria (1-Motoryzacja, 2-Elektronika): "; 
-            cin >> kat;
+            string t, l, o, cecha; 
+            float c;
+            bool poprawnaKat = false;
+            bool poprawnaCena = false;
+
+            do {
+                cout << "Kategoria (1-Motoryzacja, 2-Elektronika): ";
+                if (!(cin >> kat)) {
+                    cout << "Błąd: Należy wpisać cyfrę!" << endl;
+                    cin.clear();
+                    cin.ignore(1000, '\n');
+                    continue;
+                }
+                if (kat == 1 || kat == 2) poprawnaKat = true;
+                else cout << "Błąd: Wybierz opcję 1 lub 2!" << endl;
+            } while (!poprawnaKat);
             cin.ignore();
             cout << "Tytuł: "; getline(cin, t);
             cout << "Lokalizacja: "; getline(cin, l);
             cout << "Opis: "; getline(cin, o);
-            cout << "Cena: "; 
-            cin >> c;
+            do {
+                cout << "Cena: ";
+                if (!(cin >> c)) {
+                    cout << "Błąd: Cena musi być liczbą (użyj kropki dla groszy)!" << endl;
+                    cin.clear();
+                    cin.ignore(1000, '\n');
+                    continue;
+                }
+
+                if (c >= 0) {
+                    poprawnaCena = true;
+                }
+                else {
+                    cout << "Błąd: Cena nie może być ujemna!" << endl;
+                }
+
+            } while (!poprawnaCena);
 
             if (kat == 1) {
-                int p; cout << "Przebieg: "; 
-                cin >> p;
+                int p;
+                bool poprawnyPrzebieg = false;
+                do {
+                    cout << "Przebieg: ";
+                    if (!(cin >> p)) {
+                        cout << "Błąd: Przebieg musi być liczbą!" << endl;
+                        cin.clear();
+                        cin.ignore(1000, '\n');
+                        continue;
+                    }
+
+                    if (p >= 0) {
+                        poprawnyPrzebieg = true;
+                    }
+                    else {
+                        cout << "Błąd: Przebieg nie może być ujemny!" << endl;
+                    }
+
+                } while (!poprawnyPrzebieg);
                 tablica[licznik] = new Motoryzacja(t, l, o, system.u.zwrocLogin(), c, 0, p);
             }
             else {
