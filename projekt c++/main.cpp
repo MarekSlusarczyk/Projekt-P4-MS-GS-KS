@@ -393,7 +393,6 @@ void appMenu(SystemLogowania& system, Ogloszenie**& tablica, int& licznik, int& 
                 }
 
             } while (!poprawnaCena);
-
             if (kat == 1) {
                 int p;
                 bool poprawnyPrzebieg = false;
