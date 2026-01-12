@@ -36,6 +36,9 @@ public:
         opis = o; 
         cena = c;
     }
+    string zwrocTytul() { 
+        return tytul; 
+    }
 };
 
 class Motoryzacja : public Ogloszenie {

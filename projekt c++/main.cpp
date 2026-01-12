@@ -77,24 +77,60 @@ void appMenu(SystemLogowania& system, Ogloszenie**& tablica, int& licznik, int& 
 		cout << "2. Filtruj ogłoszenia według kategorii" << endl;
 		cout << "3. Twoje ogłoszenia" << endl;
 		cout << "4. Dodaj ogłoszenie" << endl;
-		cout << "5. Wyloguj się" << endl;
+        cout << "5. Wyszukiwarka ogłoszeń" << endl;
+		cout << "6. Wyloguj się" << endl;
 		cout << "--------------" << endl;
 		cin >> wybor;
         switch (wybor) {
         case 1: {
-            cout << "\n--- AKTUALNE OFERTY ---" << endl;
             int wyswietlono = 0;
-
+            cout << "\n--- WSZYSTKIE OGŁOSZENIA ---" << endl;
             for (int i = 0; i < licznik; i++) {
                 if (tablica[i]->zwrocStatus() == 0) {
-                    string nazwaDoPokazania = znajdzNazwePoLoginie(tablica[i]->zwrocWlasciciela());
-                    tablica[i]->wyswietl(nazwaDoPokazania);
+                    cout << "ID: [" << i << "] ";
+                    string n = znajdzNazwePoLoginie(tablica[i]->zwrocWlasciciela());
+                    tablica[i]->wyswietl(n);
                     wyswietlono++;
                 }
             }
 
-            if (wyswietlono == 0) {
-                cout << "Obecnie nie ma żadnych dostępnych ofert." << endl;
+            if (wyswietlono > 0) {
+                int wybor;
+                bool poprawnyWybor = false;
+
+                do {
+                    cout << "Wpisz ID ogłoszenia, które chcesz kupić (lub -1 aby wrócić): ";
+                    if (!(cin >> wybor)) {
+                        cin.clear();
+                        cin.ignore(1000, '\n');
+                        cout << "Błąd: Wpisz poprawną liczbę!" << endl;
+                        continue;
+                    }
+
+                    if (wybor == -1) break;
+
+                    if (wybor >= 0 && wybor < licznik && tablica[wybor]->zwrocStatus() == 0) {
+                        if (tablica[wybor]->zwrocWlasciciela() != system.u.zwrocLogin()) {
+
+                            tablica[wybor]->ustawStatus(1);
+                            zapiszDoPliku(tablica, licznik);
+                            cout << "\n------------------" << endl;
+                            cout << "Zakupiono produkt!" << endl;
+                            cout << "------------------" << endl;
+                            poprawnyWybor = true;
+                        }
+                        else {
+                            cout << "Błąd: Nie możesz kupić własnego produktu!" << endl;
+                        }
+                    }
+                    else {
+                        cout << "Błąd: Nieprawidłowe ID lub oferta jest niedostępna. Spróbuj ponownie." << endl;
+                    }
+                } while (!poprawnyWybor);
+
+            }
+            else {
+                cout << "Brak dostępnych ofert." << endl;
             }
             break;
         }
@@ -121,8 +157,8 @@ void appMenu(SystemLogowania& system, Ogloszenie**& tablica, int& licznik, int& 
             break;
         }
         case 3: {
-            cout << "\n--- TWOJE AKTYWNE OGŁOSZENIA ---" << endl;
             bool znaleziono = false;
+            cout << "\n--- TWOJE AKTYWNE OGŁOSZENIA ---" << endl;
             for (int i = 0; i < licznik; i++) {
                 if (tablica[i]->zwrocWlasciciela() == system.u.zwrocLogin() && tablica[i]->zwrocStatus() == 0) {
                     cout << "ID: [" << i << "] ";
@@ -132,47 +168,69 @@ void appMenu(SystemLogowania& system, Ogloszenie**& tablica, int& licznik, int& 
             }
 
             if (znaleziono) {
-                cout << "Podaj ID ogłoszenia do zarządzania (lub -1 żeby wrócić): ";
-                int id; 
-                cin >> id;
-                if (id >= 0 && id < licznik && tablica[id]->zwrocWlasciciela() == system.u.zwrocLogin()) {
-                    cout << "1. Edytuj ogłoszenie\n2. Usuń ogłoszenie\nWybór: ";
-                    int akcja; 
-                    cin >> akcja;
+                int id;
+                bool poprawneID = false;
 
-                    if (akcja == 1) {
-                        string t, l, o; float c;
-                        cin.ignore();
-                        cout << "Nowy tytuł: "; getline(cin, t);
-                        cout << "Nowa lokalizacja: "; getline(cin, l);
-                        cout << "Nowy opis: "; getline(cin, o);
-                        cout << "Nowa cena: "; cin >> c;
-
-                        tablica[id]->edytujDaneBazowe(t, l, o, c);
-
-                        if (tablica[id]->zwrocKategorie() == "Motoryzacja") {
-                            int p; cout << "Nowy przebieg: "; 
-                            cin >> p;
-                            static_cast<Motoryzacja*>(tablica[id])->ustawPrzebieg(p);
-                        }
-                        else {
-                            string s; 
-                            cout << "Nowy stan: "; 
-                            cin.ignore(); 
-                            getline(cin, s);
-                            static_cast<Elektronika*>(tablica[id])->ustawStan(s);
-                        }
-                        cout << "Ogłoszenie zaktualizowane!" << endl;
-                    }
-                    else if (akcja == 2) {
-                        tablica[id]->ustawStatus(2);
-                        cout << "Ogłoszenie usunięte." << endl;
+                do {
+                    cout << "Podaj ID ogłoszenia do zarządzania (lub -1 żeby wrócić): ";
+                    if (!(cin >> id)) {
+                        cin.clear();
+                        cin.ignore(1000, '\n');
+                        cout << "Błąd: Wpisz poprawną liczbę!" << endl;
+                        continue;
                     }
 
-                    zapiszDoPliku(tablica, licznik);
-                }
+                    if (id == -1) break;
+
+
+                    if (id >= 0 && id < licznik &&
+                        tablica[id]->zwrocWlasciciela() == system.u.zwrocLogin() &&
+                        tablica[id]->zwrocStatus() == 0) {
+
+                        poprawneID = true;
+
+                        cout << "1. Edytuj ogłoszenie\n2. Usuń ogłoszenie\nWybór: ";
+                        int akcja; 
+                        cin >> akcja;
+
+                        if (akcja == 1) {
+                            string t, l, o; float c;
+                            cin.ignore();
+                            cout << "Nowy tytuł: "; getline(cin, t);
+                            cout << "Nowa lokalizacja: "; getline(cin, l);
+                            cout << "Nowy opis: "; getline(cin, o);
+                            cout << "Nowa cena: "; cin >> c;
+
+                            tablica[id]->edytujDaneBazowe(t, l, o, c);
+
+                            if (tablica[id]->zwrocKategorie() == "Motoryzacja") {
+                                int p; cout << "Nowy przebieg: "; cin >> p;
+                                static_cast<Motoryzacja*>(tablica[id])->ustawPrzebieg(p);
+                            }
+                            else {
+                                string s; cout << "Nowy stan: "; cin.ignore(); getline(cin, s);
+                                static_cast<Elektronika*>(tablica[id])->ustawStan(s);
+                            }
+                            cout << "\n---------------------------------" << endl;
+                            cout << "Ogłoszenie zostało zaktualizowane!" << endl;
+                            cout << "\n---------------------------------" << endl;
+                            zapiszDoPliku(tablica, licznik);
+                        }
+                        else if (akcja == 2) {
+                            tablica[id]->ustawStatus(2);
+                            cout << "Ogłoszenie pomyślnie usunięte." << endl;
+                            zapiszDoPliku(tablica, licznik);
+                        }
+                    }
+                    else {
+                        cout << "Błąd: To nie jest Twoje ogłoszenie lub podano błędne ID! Spróbuj ponownie." << endl;
+                    }
+                } while (!poprawneID);
+
             }
-            else cout << "Brak ogłoszeń do wyświetlenia." << endl;
+            else {
+                cout << "Nie masz obecnie żadnych aktywnych ogłoszeń." << endl;
+            }
             break;
         }
         case 4: {
@@ -199,10 +257,78 @@ void appMenu(SystemLogowania& system, Ogloszenie**& tablica, int& licznik, int& 
             }
             licznik++;
             zapiszDoPliku(tablica, licznik);
-            cout << "Dodano pomyślnie!" << endl;
+            cout << "\n------------------------" << endl;
+            cout << "Ogłoszenie zostało dodane!" << endl;
+            cout << "------------------------" << endl;
             break;
         }
-        case 5:
+        case 5: {
+            string fraza;
+            cout << "\n--- WYSZUKIWARKA ---" << endl;
+            cout << "Wpisz czego szukasz: ";
+            cin.ignore();
+            getline(cin, fraza);
+
+            int znaleziono = 0;
+            cout << "\nWyniki wyszukiwania dla: \"" << fraza << "\"" << endl;
+            cout << "---------------------------------------" << endl;
+
+            for (int i = 0; i < licznik; i++) {
+                if (tablica[i]->zwrocStatus() == 0) {
+                    string tytul = tablica[i]->zwrocTytul();
+
+                    if (tytul.find(fraza) != string::npos) {
+                        cout << "ID: [" << i << "] ";
+                        string n = znajdzNazwePoLoginie(tablica[i]->zwrocWlasciciela());
+                        tablica[i]->wyswietl(n);
+                        znaleziono++;
+                    }
+                }
+            }
+
+            if (znaleziono > 0) {
+                int wybor;
+                bool poprawnyWybor = false;
+
+                do {
+                    cout << "Wpisz ID ogłoszenia, które chcesz kupić (lub -1 aby wrócić): ";
+                    if (!(cin >> wybor)) {
+                        cin.clear();
+                        cin.ignore(1000, '\n');
+                        cout << "Błąd: Wpisz poprawną liczbę!" << endl;
+                        continue;
+                    }
+
+                    if (wybor == -1) break;
+
+                    if (wybor >= 0 && wybor < licznik && tablica[wybor]->zwrocStatus() == 0 &&
+                        tablica[wybor]->zwrocTytul().find(fraza) != string::npos) {
+
+                        if (tablica[wybor]->zwrocWlasciciela() != system.u.zwrocLogin()) {
+                            tablica[wybor]->ustawStatus(1);
+                            zapiszDoPliku(tablica, licznik);
+
+                            cout << "\n------------------" << endl;
+                            cout << "Zakupiono produkt!" << endl;
+                            cout << "------------------" << endl;
+                            poprawnyWybor = true;
+                        }
+                        else {
+                            cout << "Błąd: Nie możesz kupić własnego produktu!" << endl;
+                        }
+                    }
+                    else {
+                        cout << "Błąd: To ID nie znajduje się na liście wyników wyszukiwania. Spróbuj ponownie." << endl;
+                    }
+                } while (!poprawnyWybor);
+
+            }
+            else {
+                cout << "Brak wyników pasujących do frazy." << endl;
+            }
+            break;
+        }
+        case 6:
             system.wyloguj();
             break;
         }

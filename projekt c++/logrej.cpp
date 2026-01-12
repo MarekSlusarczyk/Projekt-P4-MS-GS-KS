@@ -1,4 +1,5 @@
 #include "logrej.h"
+#include "logger.h"
 #include <fstream>
 #include <sstream>
 
@@ -57,6 +58,7 @@ void SystemLogowania::rejestracja() {
                 plikZapis << u.login << ";" << u.haslo << ";" << u.nazwaUzytkownika << endl;
                 plikZapis.close();
                 cout << "Konto zosta³o utworzone!" << endl;
+                Logger::zapisz("Utworzono nowe konto: " + u.login);
             }
             break;
         }
@@ -81,6 +83,7 @@ bool SystemLogowania::logowanie() {
             if (plikLogin == loginInput && plikHaslo == hasloInput) {
                 u.login = loginInput;
                 u.nazwaUzytkownika = plikNazwaUzytkownika;
+                Logger::zapisz("Zalogowano u¿ytkownika: " + u.login);
                 this->zalogowany = true;
                 plik.close();
                 return true;

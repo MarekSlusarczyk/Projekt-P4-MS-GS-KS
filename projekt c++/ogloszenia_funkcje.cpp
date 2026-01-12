@@ -1,6 +1,8 @@
 #include "ogloszenia_funkcje.h"
+#include "logger.h"
 #include <fstream>
 #include <sstream>
+
 
 void powiekszTablice(Ogloszenie**& tablica, int& obecnyMax) {
     int nowyMax = obecnyMax + 10;
@@ -15,7 +17,7 @@ void powiekszTablice(Ogloszenie**& tablica, int& obecnyMax) {
     tablica = nowaTablica;
     obecnyMax = nowyMax;
 
-    cout << "[SYSTEM] Zwiêkszono limit bazy do " << nowyMax << " miejsc." << endl;
+    Logger::zapisz("Zwiêkszono rozmiar tablicy do " + to_string(nowyMax) + " elementów.");
 }
 
 void zapiszDoPliku(Ogloszenie** tablica, int licznik) {
