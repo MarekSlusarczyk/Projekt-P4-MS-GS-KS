@@ -1,6 +1,7 @@
 ﻿#include <iostream>
 #include <string>
 #include "logrej.h"
+#include "logger.h"
 #include "ogloszenia_funkcje.h"
 
 using namespace std;
@@ -49,7 +50,14 @@ void mainMenu(SystemLogowania& system) {
 		cout << "2. Rejestracja" << endl;
 		cout << "3. Wyjście" << endl;
 		cout << "--------------" << endl;
-		cin >> wybor;
+
+        if (!(cin >> wybor)) {
+            cout << "Błąd: Należy wpisać cyfrę podaną w menu!" << endl;
+            cin.clear();
+            cin.ignore(1000, '\n');
+            continue;
+        }
+
 		switch (wybor) {
 		case 1:
 			if (system.logowanie()) {
@@ -80,7 +88,12 @@ void appMenu(SystemLogowania& system, Ogloszenie**& tablica, int& licznik, int& 
         cout << "5. Wyszukiwarka ogłoszeń" << endl;
 		cout << "6. Wyloguj się" << endl;
 		cout << "--------------" << endl;
-		cin >> wybor;
+        if (!(cin >> wybor)) {
+            cout << "Błąd: Należy wpisać cyfrę podaną w menu!" << endl;
+            cin.clear();
+            cin.ignore(1000, '\n');
+            continue;
+        }
         switch (wybor) {
         case 1: {
             int wyswietlono = 0;
@@ -114,6 +127,9 @@ void appMenu(SystemLogowania& system, Ogloszenie**& tablica, int& licznik, int& 
 
                             tablica[wybor]->ustawStatus(1);
                             zapiszDoPliku(tablica, licznik);
+
+                            Logger::zapisz("Użytkownik " + system.u.zwrocLogin() + " kupił produkt o ID: " + to_string(wybor));
+
                             cout << "\n------------------" << endl;
                             cout << "Zakupiono produkt!" << endl;
                             cout << "------------------" << endl;
@@ -135,23 +151,75 @@ void appMenu(SystemLogowania& system, Ogloszenie**& tablica, int& licznik, int& 
             break;
         }
         case 2: {
-            cout << "Wybierz kategorię (1 - Motoryzacja, 2 - Elektronika): ";
-            int kat; 
-            cin >> kat;
+            int kat;
+            bool poprawnaKat = false;
+
+            do {
+                cout << "Wybierz kategorię (1 - Motoryzacja, 2 - Elektronika): ";
+                if (!(cin >> kat)) {
+                    cout << "Błąd: Należy wpisać cyfrę!" << endl;
+                    cin.clear();
+                    cin.ignore(1000, '\n');
+                    continue;
+                }
+                if (kat == 1 || kat == 2) poprawnaKat = true;
+                else cout << "Błąd: Wybierz opcję 1 lub 2!" << endl;
+            } while (!poprawnaKat);
+
             string szukana = (kat == 1) ? "Motoryzacja" : "Elektronika";
 
             int wyswietlono = 0;
             cout << "\n--- OFERTY Z KATEGORII: " << szukana << " ---" << endl;
-
             for (int i = 0; i < licznik; i++) {
                 if (tablica[i]->zwrocKategorie() == szukana && tablica[i]->zwrocStatus() == 0) {
+                    cout << "ID: [" << i << "] ";
                     string nazwaDoPokazania = znajdzNazwePoLoginie(tablica[i]->zwrocWlasciciela());
                     tablica[i]->wyswietl(nazwaDoPokazania);
                     wyswietlono++;
                 }
             }
 
-            if (wyswietlono == 0) {
+            if (wyswietlono > 0) {
+                int wybor;
+                bool poprawnyWybor = false;
+
+                do {
+                    cout << "\nWpisz ID ogłoszenia, które chcesz kupić (lub -1 aby wrócić): ";
+                    if (!(cin >> wybor)) {
+                        cin.clear();
+                        cin.ignore(1000, '\n');
+                        cout << "Błąd: Wpisz poprawną liczbę!" << endl;
+                        continue;
+                    }
+
+                    if (wybor == -1) break;
+
+                    if (wybor >= 0 && wybor < licznik &&
+                        tablica[wybor]->zwrocStatus() == 0 &&
+                        tablica[wybor]->zwrocKategorie() == szukana) {
+
+                        if (tablica[wybor]->zwrocWlasciciela() != system.u.zwrocLogin()) {
+                            tablica[wybor]->ustawStatus(1);
+                            zapiszDoPliku(tablica, licznik);
+
+                            Logger::zapisz("Użytkownik " + system.u.zwrocLogin() + " kupił produkt o ID: " + to_string(wybor));
+
+                            cout << "\n------------------" << endl;
+                            cout << "Zakupiono produkt!" << endl;
+                            cout << "------------------" << endl;
+                            poprawnyWybor = true;
+                        }
+                        else {
+                            cout << "Błąd: Nie możesz kupić własnego produktu!" << endl;
+                        }
+                    }
+                    else {
+                        cout << "Błąd: To ID nie pasuje do wyświetlonej listy. Spróbuj ponownie." << endl;
+                    }
+                } while (!poprawnyWybor);
+
+            }
+            else {
                 cout << "Brak aktywnych ogłoszeń w tej kategorii." << endl;
             }
             break;
@@ -189,9 +257,21 @@ void appMenu(SystemLogowania& system, Ogloszenie**& tablica, int& licznik, int& 
 
                         poprawneID = true;
 
-                        cout << "1. Edytuj ogłoszenie\n2. Usuń ogłoszenie\nWybór: ";
-                        int akcja; 
-                        cin >> akcja;
+                        int akcja;
+                        bool poprawnaAkcja = false;
+
+                        do {
+                            cout << "1. Edytuj ogłoszenie\n2. Usuń ogłoszenie\nWybór: ";
+                            if (!(cin >> akcja)) {
+                                cout << "Błąd: Należy wpisać cyfrę!" << endl;
+                                cin.clear();
+                                cin.ignore(1000, '\n');
+                                continue;
+                            }
+                            if (akcja == 1 || akcja == 2) poprawnaAkcja = true;
+                            else cout << "Błąd: Wybierz opcję 1 lub 2!" << endl;
+                        } while (!poprawnaAkcja);
+
 
                         if (akcja == 1) {
                             string t, l, o; float c;
@@ -199,12 +279,14 @@ void appMenu(SystemLogowania& system, Ogloszenie**& tablica, int& licznik, int& 
                             cout << "Nowy tytuł: "; getline(cin, t);
                             cout << "Nowa lokalizacja: "; getline(cin, l);
                             cout << "Nowy opis: "; getline(cin, o);
-                            cout << "Nowa cena: "; cin >> c;
+                            cout << "Nowa cena: "; 
+                            cin >> c;
 
                             tablica[id]->edytujDaneBazowe(t, l, o, c);
 
                             if (tablica[id]->zwrocKategorie() == "Motoryzacja") {
-                                int p; cout << "Nowy przebieg: "; cin >> p;
+                                int p; cout << "Nowy przebieg: "; 
+                                cin >> p;
                                 static_cast<Motoryzacja*>(tablica[id])->ustawPrzebieg(p);
                             }
                             else {
@@ -218,7 +300,7 @@ void appMenu(SystemLogowania& system, Ogloszenie**& tablica, int& licznik, int& 
                         }
                         else if (akcja == 2) {
                             tablica[id]->ustawStatus(2);
-                            cout << "Ogłoszenie pomyślnie usunięte." << endl;
+                            cout << "Ogłoszenie zostało usunięte." << endl;
                             zapiszDoPliku(tablica, licznik);
                         }
                     }
@@ -240,19 +322,24 @@ void appMenu(SystemLogowania& system, Ogloszenie**& tablica, int& licznik, int& 
 
             int kat;
             string t, l, o, cecha; float c;
-            cout << "Kategoria (1-Motoryzacja, 2-Elektronika): "; cin >> kat;
+            cout << "Kategoria (1-Motoryzacja, 2-Elektronika): "; 
+            cin >> kat;
             cin.ignore();
             cout << "Tytuł: "; getline(cin, t);
             cout << "Lokalizacja: "; getline(cin, l);
             cout << "Opis: "; getline(cin, o);
-            cout << "Cena: "; cin >> c;
+            cout << "Cena: "; 
+            cin >> c;
 
             if (kat == 1) {
-                int p; cout << "Przebieg: "; cin >> p;
+                int p; cout << "Przebieg: "; 
+                cin >> p;
                 tablica[licznik] = new Motoryzacja(t, l, o, system.u.zwrocLogin(), c, 0, p);
             }
             else {
-                cout << "Stan: "; cin.ignore(); getline(cin, cecha);
+                cout << "Stan: "; 
+                cin.ignore(); 
+                getline(cin, cecha);
                 tablica[licznik] = new Elektronika(t, l, o, system.u.zwrocLogin(), c, 0, cecha);
             }
             licznik++;
@@ -307,6 +394,8 @@ void appMenu(SystemLogowania& system, Ogloszenie**& tablica, int& licznik, int& 
                         if (tablica[wybor]->zwrocWlasciciela() != system.u.zwrocLogin()) {
                             tablica[wybor]->ustawStatus(1);
                             zapiszDoPliku(tablica, licznik);
+
+                            Logger::zapisz("Użytkownik " + system.u.zwrocLogin() + " kupił produkt o ID: " + to_string(wybor));
 
                             cout << "\n------------------" << endl;
                             cout << "Zakupiono produkt!" << endl;
