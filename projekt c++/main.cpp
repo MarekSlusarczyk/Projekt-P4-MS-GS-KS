@@ -155,18 +155,22 @@ void appMenu(SystemLogowania& system, Ogloszenie**& tablica, int& licznik, int& 
             bool poprawnaKat = false;
 
             do {
-                cout << "Wybierz kategorię (1 - Motoryzacja, 2 - Elektronika): ";
+                cout << "Wybierz kategorię (1 - Motoryzacja, 2 - Elektronika, 3 - Odzież, 4 - Książki): ";
                 if (!(cin >> kat)) {
                     cout << "Błąd: Należy wpisać cyfrę!" << endl;
                     cin.clear();
                     cin.ignore(1000, '\n');
                     continue;
                 }
-                if (kat == 1 || kat == 2) poprawnaKat = true;
-                else cout << "Błąd: Wybierz opcję 1 lub 2!" << endl;
+                if (kat >= 1 && kat <= 4) poprawnaKat = true;
+                else cout << "Błąd: Wybierz opcję 1, 2, 3 lub 4!" << endl;
             } while (!poprawnaKat);
 
-            string szukana = (kat == 1) ? "Motoryzacja" : "Elektronika";
+            string szukana;
+            if (kat == 1) szukana = "Motoryzacja";
+            else if (kat == 2) szukana = "Elektronika";
+            else if (kat == 3) szukana = "Odziez";
+            else if (kat == 4) szukana = "Ksiazki";
 
             int wyswietlono = 0;
             cout << "\n--- OFERTY Z KATEGORII: " << szukana << " ---" << endl;
@@ -269,7 +273,7 @@ void appMenu(SystemLogowania& system, Ogloszenie**& tablica, int& licznik, int& 
                                 continue;
                             }
                             if (akcja == 1 || akcja == 2) poprawnaAkcja = true;
-                            else cout << "Błąd: Wybierz opcję 1 lub 2!" << endl;
+                            else cout << "Błąd: Wybierz opcję 1,2,3, lub 4!" << endl;
                         } while (!poprawnaAkcja);
 
 
@@ -311,22 +315,38 @@ void appMenu(SystemLogowania& system, Ogloszenie**& tablica, int& licznik, int& 
                                         cin.ignore(1000, '\n');
                                         continue;
                                     }
-
                                     if (p >= 0) {
                                         poprawnyPrzebieg = true;
                                     }
                                     else {
                                         cout << "Błąd: Przebieg nie może być ujemny!" << endl;
                                     }
-
                                 } while (!poprawnyPrzebieg);
+
                                 static_cast<Motoryzacja*>(tablica[id])->ustawPrzebieg(p);
                             }
-                            else {
-                                string s; cout << "Nowy stan: "; 
-                                cin.ignore(); 
+                            else if (tablica[id]->zwrocKategorie() == "Elektronika") { // <--- TUTAJ JEST ZMIANA
+                                string s;
+                                cout << "Nowy stan: ";
+                                cin.ignore(); // To musi tu byc, bo wczesniej wpisywales cene (liczbe)
                                 getline(cin, s);
                                 static_cast<Elektronika*>(tablica[id])->ustawStan(s);
+                            }
+                            else if (tablica[id]->zwrocKategorie() == "Odziez") {
+                                string s;
+                                cout << "Nowy rozmiar: ";
+                                cin.ignore();
+                                getline(cin, s);
+                                // UWAGA: Upewnij się, że w klasie Odziez masz metodę np. ustawRozmiar
+                                static_cast<Odziez*>(tablica[id])->ustawRozmiar(s);
+                            }
+                            else if (tablica[id]->zwrocKategorie() == "Ksiazki") {
+                                string s;
+                                cout << "Nowy autor: ";
+                                cin.ignore();
+                                getline(cin, s);
+                                // UWAGA: Upewnij się, że w klasie Ksiazki masz metodę np. ustawAutora
+                                static_cast<Ksiazki*>(tablica[id])->ustawAutora(s);
                             }
                             cout << "\n---------------------------------" << endl;
                             cout << "Ogłoszenie zostało zaktualizowane!" << endl;
@@ -362,15 +382,15 @@ void appMenu(SystemLogowania& system, Ogloszenie**& tablica, int& licznik, int& 
             bool poprawnaCena = false;
 
             do {
-                cout << "Kategoria (1-Motoryzacja, 2-Elektronika): ";
+                cout << "Kategoria (1-Motoryzacja, 2-Elektronika, 3-Odziez, 4-Ksiazki): ";
                 if (!(cin >> kat)) {
                     cout << "Błąd: Należy wpisać cyfrę!" << endl;
                     cin.clear();
                     cin.ignore(1000, '\n');
                     continue;
                 }
-                if (kat == 1 || kat == 2) poprawnaKat = true;
-                else cout << "Błąd: Wybierz opcję 1 lub 2!" << endl;
+                if (kat >= 1 && kat <= 4 ) poprawnaKat = true;
+                else cout << "Błąd: Wybierz opcję 1, 2, 3 lub 4!" << endl;
             } while (!poprawnaKat);
             cin.ignore();
             cout << "Tytuł: "; getline(cin, t);
@@ -393,40 +413,32 @@ void appMenu(SystemLogowania& system, Ogloszenie**& tablica, int& licznik, int& 
                 }
 
             } while (!poprawnaCena);
+
             if (kat == 1) {
                 int p;
-                bool poprawnyPrzebieg = false;
-                do {
-                    cout << "Przebieg: ";
-                    if (!(cin >> p)) {
-                        cout << "Błąd: Przebieg musi być liczbą!" << endl;
-                        cin.clear();
-                        cin.ignore(1000, '\n');
-                        continue;
-                    }
-
-                    if (p >= 0) {
-                        poprawnyPrzebieg = true;
-                    }
-                    else {
-                        cout << "Błąd: Przebieg nie może być ujemny!" << endl;
-                    }
-
-                } while (!poprawnyPrzebieg);
+                cout << "Przebieg: "; cin >> p;
                 tablica[licznik] = new Motoryzacja(t, l, o, system.u.zwrocLogin(), c, 0, p);
             }
-            else {
-                cout << "Stan: "; 
-                cin.ignore(); 
-                getline(cin, cecha);
+            else if (kat == 2) {
+                cout << "Stan: "; cin.ignore(); getline(cin, cecha);
                 tablica[licznik] = new Elektronika(t, l, o, system.u.zwrocLogin(), c, 0, cecha);
             }
+            else if (kat == 3) {
+                cout << "Rozmiar: "; cin.ignore(); getline(cin, cecha);
+                tablica[licznik] = new Odziez(t, l, o, system.u.zwrocLogin(), c, 0, cecha);
+            }
+            else if (kat == 4) {
+                cout << "Autor: "; cin.ignore(); getline(cin, cecha);
+                tablica[licznik] = new Ksiazki(t, l, o, system.u.zwrocLogin(), c, 0, cecha);
+            }
+
             licznik++;
             zapiszDoPliku(tablica, licznik);
             cout << "\n------------------------" << endl;
             cout << "Ogłoszenie zostało dodane!" << endl;
             cout << "------------------------" << endl;
             break;
+        
         }
         case 5: {
             string fraza;

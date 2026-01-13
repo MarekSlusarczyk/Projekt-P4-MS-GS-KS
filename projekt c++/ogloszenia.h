@@ -89,4 +89,49 @@ public:
     }
 };
 
+class Odziez : public Ogloszenie {
+    string rozmiar;
+public:
+    Odziez(string t, string l, string o, string d, float c, int sO, string r) : Ogloszenie(t, l, o, d, c, sO), rozmiar(r) {}
+
+    void wyswietl(string nazwaWyswietlana) override {
+        cout << "[ODZIE¯] | Sprzedaj¹cy: " << nazwaWyswietlana << endl;
+        cout << "Tytu³: " << tytul << endl;
+        cout << "Opis: " << opis << endl;
+        cout << "Cena: " << cena << " z³" << endl;
+        cout << "Rozmiar: " << rozmiar << endl;
+        cout << "-----------------------\n" << endl;
+    }
+    string zwrocKategorie() override { return "Odziez"; }
+
+    string sformatujDoZapisu() override {
+        return "Odziez;" + tytul + ";" + lokalizacja + ";" + opis + ";" + dodanePrzez + ";" + to_string(cena) + ";" + to_string(statusOgloszenia) + ";" + rozmiar;
+    }
+    void ustawRozmiar(string r) {
+        rozmiar = r;
+    }
+};
+
+class Ksiazki : public Ogloszenie {
+    string autor;
+public:
+    Ksiazki(string t, string l, string o, string d, float c, int sO, string a) : Ogloszenie(t, l, o, d, c, sO), autor(a) {}
+
+    void wyswietl(string nazwaWyswietlana) override {
+        cout << "[KSI¥¯KI] | Sprzedaj¹cy: " << nazwaWyswietlana << endl;
+        cout << "Tytu³: " << tytul << endl;
+        cout << "Opis: " << opis << endl;
+        cout << "Cena: " << cena << " z³" << endl;
+        cout << "Autor: " << autor << endl;
+        cout << "-----------------------\n" << endl;
+    }
+    string zwrocKategorie() override { return "Ksiazki"; }
+
+    string sformatujDoZapisu() override {
+        return "Ksiazki;" + tytul + ";" + lokalizacja + ";" + opis + ";" + dodanePrzez + ";" + to_string(cena) + ";" + to_string(statusOgloszenia) + ";" + autor;
+    }
+    void ustawAutora(string a) {
+        autor = a;
+    }
+};
 #endif

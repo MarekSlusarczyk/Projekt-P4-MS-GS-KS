@@ -1,0 +1,13 @@
+Motoryzacja;a;a;a;1;123.000000;0;1221
+Motoryzacja;1;1;1;1;1.000000;2;1
+Elektronika;Laptop u¿ywany;Bochnia;Laptop u¿ywany prawie nowy ;sowa;1250.000000;0;u¿ywany
+Motoryzacja;Fiat 126p;Kraków;strza³a jak nowa, mo¿e troche przyrdzewia³a ale do Krakowa wjedzie;sowa;3999.000000;0;250000
+Motoryzacja;Opel Astra G;Warszawa;Sprzedam Opla, nie bity, p³aka³ jak sprzedawa³.;janusz_biznesu;12000.000000;0;250000
+Motoryzacja;BMW E46;Kraków;Gruz do latania bokiem, dyfer pospawany.;seba_krk;8500.000000;0;320000
+Motoryzacja;Fiat 126p;Radom;Klasyk polskiej motoryzacji, pali na dotyk.;kolekcjoner_pl;25000.000000;0;45000
+Elektronika;iPhone 13 Pro;Wroc³aw;Stan idealny, bateria 90%, bez blokad.;apple_fan;3200.000000;0;U¿ywany
+Elektronika;Sony PlayStation 5;Poznañ;Nietrafiony prezent, pude³ko nieotwierane.;gracz_poznan;2100.000000;0;Nowy
+Elektronika;Laptop Dell XPS;Gdañsk;Lekkie rysy na obudowie, matryca czysta.;informatyk_wawa;4500.000000;0;Dobry
+Odziez;Buty Nike;Bochnia;Nowe buty nike dunk rozmiar 43;1;250.000000;0;43
+Odziez;kurtka skórzana;Kraków;Kurtka skurzana br¹zowa ze skóry a nie imitacji skóry;1;450.000000;0;L
+Ksiazki;Harry Potter i Kamieñ filozoficzny;Tarnów;Ksi¹¿ka przeczytana raz widoczne lekkie odgiêcia od czytania;1;45.000000;0;J.K Rowling

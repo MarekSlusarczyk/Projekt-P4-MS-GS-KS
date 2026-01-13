@@ -1,0 +1,76 @@
+
+[SYSTEM | 2026-01-12 14:35:56] Zwiêkszono rozmiar tablicy do 12 elementów.
+[SYSTEM | 2026-01-12 14:39:55] Zwiêkszono rozmiar tablicy do 12 elementów.
+[SYSTEM | 2026-01-12 14:40:04] Utworzono nowe konto: hjk
+[SYSTEM | 2026-01-12 14:40:40] Zwiêkszono rozmiar tablicy do 12 elementów.
+[SYSTEM | 2026-01-12 14:40:41] Zalogowano u¿ytkownika: 1
+[SYSTEM | 2026-01-12 14:41:53] Zwiêkszono rozmiar tablicy do 12 elementów.
+[SYSTEM | 2026-01-12 14:41:55] Zalogowano u¿ytkownika: 1
+[SYSTEM | 2026-01-12 14:48:08] Zwiêkszono rozmiar tablicy do 12 elementów.
+[SYSTEM | 2026-01-12 14:48:10] Zalogowano u¿ytkownika: 1
+[SYSTEM | 2026-01-12 14:49:39] Zwiêkszono rozmiar tablicy do 12 elementów.
+[SYSTEM | 2026-01-12 14:51:45] Zwiêkszono rozmiar tablicy do 12 elementów.
+[SYSTEM | 2026-01-12 14:53:41] Zwiêkszono rozmiar tablicy do 12 elementów.
+[SYSTEM | 2026-01-12 14:53:46] Zalogowano u¿ytkownika: 1
+[SYSTEM | 2026-01-12 14:56:32] Zwiêkszono rozmiar tablicy do 12 elementów.
+[SYSTEM | 2026-01-12 14:56:34] Zalogowano u¿ytkownika: 1
+[SYSTEM | 2026-01-12 14:57:19] Zwiêkszono rozmiar tablicy do 12 elementów.
+[SYSTEM | 2026-01-12 14:57:20] Zalogowano u¿ytkownika: 1
+[SYSTEM | 2026-01-12 15:00:52] Zwiêkszono rozmiar tablicy do 12 elementów.
+[SYSTEM | 2026-01-12 15:00:53] Zalogowano u¿ytkownika: 1
+[SYSTEM | 2026-01-12 15:04:31] Zwiêkszono rozmiar tablicy do 12 elementów.
+[SYSTEM | 2026-01-12 15:04:32] Zalogowano u¿ytkownika: 1
+[SYSTEM | 2026-01-12 15:04:42] Zwiêkszono rozmiar tablicy do 12 elementów.
+[SYSTEM | 2026-01-12 15:04:47] Zalogowano u¿ytkownika: jkow
+[SYSTEM | 2026-01-12 15:04:54] U¿ytkownik jkow kupi³ produkt o ID: 0
+[SYSTEM | 2026-01-12 15:05:16] U¿ytkownik jkow kupi³ produkt o ID: 2
+[SYSTEM | 2026-01-12 15:05:49] U¿ytkownik jkow kupi³ produkt o ID: 1
+[SYSTEM | 2026-01-12 15:11:18] Zwiêkszono rozmiar tablicy do 12 elementów.
+[SYSTEM | 2026-01-12 15:11:19] Zalogowano u¿ytkownika: 1
+[SYSTEM | 2026-01-12 15:13:57] Zwiêkszono rozmiar tablicy do 12 elementów.
+[SYSTEM | 2026-01-12 15:13:58] Zalogowano u¿ytkownika: 1
+[SYSTEM | 2026-01-12 15:21:33] Zwiêkszono rozmiar tablicy do 12 elementów.
+[SYSTEM | 2026-01-12 15:21:35] Zalogowano u¿ytkownika: 1
+[SYSTEM | 2026-01-12 15:28:24] Zalogowano u¿ytkownika: 1
+[SYSTEM | 2026-01-12 15:29:20] Zalogowano u¿ytkownika: 1
+[SYSTEM | 2026-01-12 15:33:18] Zalogowano u¿ytkownika: 1
+[SYSTEM | 2026-01-12 16:38:20] Utworzono nowe konto: sowa
+[SYSTEM | 2026-01-12 16:38:26] Zalogowano u¿ytkownika: sowa
+[SYSTEM | 2026-01-12 16:39:34] Zwiêkszono rozmiar tablicy do 12 elementów.
+[SYSTEM | 2026-01-12 17:39:47] Zwiêkszono rozmiar tablicy do 12 elementów.
+[SYSTEM | 2026-01-12 17:40:50] Utworzono nowe konto: szynka
+[SYSTEM | 2026-01-12 17:41:02] Zalogowano u¿ytkownika: sowa
+[SYSTEM | 2026-01-12 17:42:33] Zwiêkszono rozmiar tablicy do 12 elementów.
+[SYSTEM | 2026-01-12 17:42:41] Zalogowano u¿ytkownika: sowa
+[SYSTEM | 2026-01-12 17:51:44] Zwiêkszono rozmiar tablicy do 12 elementów.
+[SYSTEM | 2026-01-12 17:51:51] Zwiêkszono rozmiar tablicy do 12 elementów.
+[SYSTEM | 2026-01-12 17:52:18] Zalogowano u¿ytkownika: sowa
+[SYSTEM | 2026-01-12 17:53:45] Zwiêkszono rozmiar tablicy do 12 elementów.
+[SYSTEM | 2026-01-12 17:53:49] Zalogowano u¿ytkownika: sowa
+[SYSTEM | 2026-01-12 17:54:33] Zwiêkszono rozmiar tablicy do 12 elementów.
+[SYSTEM | 2026-01-12 17:54:36] Zalogowano u¿ytkownika: sowa
+[SYSTEM | 2026-01-12 17:54:53] Zwiêkszono rozmiar tablicy do 12 elementów.
+[SYSTEM | 2026-01-12 17:54:57] Zalogowano u¿ytkownika: sowa
+[SYSTEM | 2026-01-12 17:55:28] Zwiêkszono rozmiar tablicy do 12 elementów.
+[SYSTEM | 2026-01-12 17:55:31] Zalogowano u¿ytkownika: sowa
+[SYSTEM | 2026-01-12 17:55:57] Zwiêkszono rozmiar tablicy do 12 elementów.
+[SYSTEM | 2026-01-12 17:56:09] Zalogowano u¿ytkownika: sowa
+[SYSTEM | 2026-01-12 17:58:25] Zwiêkszono rozmiar tablicy do 12 elementów.
+[SYSTEM | 2026-01-12 17:58:28] Zalogowano u¿ytkownika: 1
+[SYSTEM | 2026-01-12 19:31:01] Zwiêkszono rozmiar tablicy do 12 elementów.
+[SYSTEM | 2026-01-12 19:31:05] Zalogowano u¿ytkownika: sowa
+[SYSTEM | 2026-01-12 19:36:29] Zwiêkszono rozmiar tablicy do 12 elementów.
+[SYSTEM | 2026-01-12 19:36:32] Zalogowano u¿ytkownika: 1
+[SYSTEM | 2026-01-12 19:42:38] Zwiêkszono rozmiar tablicy do 12 elementów.
+[SYSTEM | 2026-01-12 19:42:43] Zalogowano u¿ytkownika: 1
+[SYSTEM | 2026-01-12 19:43:30] Zwiêkszono rozmiar tablicy do 12 elementów.
+[SYSTEM | 2026-01-12 19:44:34] Zwiêkszono rozmiar tablicy do 12 elementów.
+[SYSTEM | 2026-01-13 11:38:00] Zwiêkszono rozmiar tablicy do 12 elementów.
+[SYSTEM | 2026-01-13 11:38:04] Zalogowano u¿ytkownika: 1
+[SYSTEM | 2026-01-13 11:41:02] Zwiêkszono rozmiar tablicy do 22 elementów.
+[SYSTEM | 2026-01-13 11:42:39] Zwiêkszono rozmiar tablicy do 12 elementów.
+[SYSTEM | 2026-01-13 11:42:39] Zwiêkszono rozmiar tablicy do 22 elementów.
+[SYSTEM | 2026-01-13 11:43:00] Zalogowano u¿ytkownika: 1
+[SYSTEM | 2026-01-13 11:44:45] Zwiêkszono rozmiar tablicy do 12 elementów.
+[SYSTEM | 2026-01-13 11:44:45] Zwiêkszono rozmiar tablicy do 22 elementów.
+[SYSTEM | 2026-01-13 11:44:49] Zalogowano u¿ytkownika: 1

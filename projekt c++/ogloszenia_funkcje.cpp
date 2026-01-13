@@ -64,7 +64,13 @@ void wczytajZPliku(Ogloszenie**& tablica, int& licznik, int& maxRozmiar) {
                 else if (kat == "Elektronika") {
                     tablica[licznik] = new Elektronika(t, l, o, wl, c, sO, cechaSpec);
                 }
-
+                
+                else if (kat == "Odziez") {
+                    tablica[licznik] = new Odziez(t, l, o, wl, c, sO, cechaSpec);
+                }
+                else if (kat == "Ksiazki") {
+                    tablica[licznik] = new Ksiazki(t, l, o, wl, c, sO, cechaSpec);
+                }
                 licznik++;
             }
             catch (...) {
