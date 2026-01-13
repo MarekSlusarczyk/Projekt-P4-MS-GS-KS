@@ -325,10 +325,10 @@ void appMenu(SystemLogowania& system, Ogloszenie**& tablica, int& licznik, int& 
 
                                 static_cast<Motoryzacja*>(tablica[id])->ustawPrzebieg(p);
                             }
-                            else if (tablica[id]->zwrocKategorie() == "Elektronika") { // <--- TUTAJ JEST ZMIANA
+                            else if (tablica[id]->zwrocKategorie() == "Elektronika") {
                                 string s;
                                 cout << "Nowy stan: ";
-                                cin.ignore(); // To musi tu byc, bo wczesniej wpisywales cene (liczbe)
+                                cin.ignore();
                                 getline(cin, s);
                                 static_cast<Elektronika*>(tablica[id])->ustawStan(s);
                             }
@@ -337,7 +337,6 @@ void appMenu(SystemLogowania& system, Ogloszenie**& tablica, int& licznik, int& 
                                 cout << "Nowy rozmiar: ";
                                 cin.ignore();
                                 getline(cin, s);
-                                // UWAGA: Upewnij się, że w klasie Odziez masz metodę np. ustawRozmiar
                                 static_cast<Odziez*>(tablica[id])->ustawRozmiar(s);
                             }
                             else if (tablica[id]->zwrocKategorie() == "Ksiazki") {
@@ -345,7 +344,6 @@ void appMenu(SystemLogowania& system, Ogloszenie**& tablica, int& licznik, int& 
                                 cout << "Nowy autor: ";
                                 cin.ignore();
                                 getline(cin, s);
-                                // UWAGA: Upewnij się, że w klasie Ksiazki masz metodę np. ustawAutora
                                 static_cast<Ksiazki*>(tablica[id])->ustawAutora(s);
                             }
                             cout << "\n---------------------------------" << endl;
@@ -513,4 +511,5 @@ void appMenu(SystemLogowania& system, Ogloszenie**& tablica, int& licznik, int& 
             break;
         }
 	}
+
 }
